@@ -15,7 +15,7 @@ export const movieService = {
   },
 
   getMoviesByGenre: async (
-    genreId: number,
+    genreId: string,
     page = 1,
     sortBy = "popularity.desc",
   ) => {

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Movie } from "../types/types";
-import MovieCard from "../components/MovieCard";
+import { Movie } from "../../types/types";
+import MovieCard from "../../components/MovieCard";
 
 export default function WatchLaterPage() {
   const [movies, setMovies] = useState<Movie[]>([]);

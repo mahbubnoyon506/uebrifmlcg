@@ -1,7 +1,7 @@
 "use client";
 import { useHomeData } from "./hooks/useMovies";
-import MovieCard from "./components/MovieCard";
-import GenreSection from "./components/GenreSection";
+import MovieCard from "../components/MovieCard";
+import GenreSection from "../components/GenreSection";
 
 export default function HomePage() {
   const { genres, topRated, isLoading, isError } = useHomeData();

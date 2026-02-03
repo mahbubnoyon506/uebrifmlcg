@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Genre } from "../types/types";
-import { useGenrePreview } from "../hooks/useMovies";
+import { useGenrePreview } from "../app/hooks/useMovies";
 import MovieCard from "./MovieCard";
 
 export default function GenreSection({ genre }: { genre: Genre }) {

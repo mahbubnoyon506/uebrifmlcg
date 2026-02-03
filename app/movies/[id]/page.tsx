@@ -8,9 +8,9 @@ import { useEffect } from "react";
 
 import { Star, Clock, Calendar } from "lucide-react";
 import { useRecentViewed } from "@/app/hooks/useRecentViewed";
-import { movieService } from "@/app/services/MovieServices";
-import MovieCard from "@/app/components/MovieCard";
-import { getImageUrl } from "@/app/lib/api";
+import { movieService } from "@/services/movieServices";
+import MovieCard from "@/components/MovieCard";
+import { getImageUrl } from "@/lib/api";
 
 export default function MovieDetailsPage() {
   const { id } = useParams();

@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Movie } from "../types/types";
-import MovieCard from "../components/MovieCard";
+import { Movie } from "../../types/types";
+import MovieCard from "../../components/MovieCard";
 
 export default function RecentlyViewedPage() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    // Requirement 4a: Display the list of recently viewed movies [cite: 41]
     const saved = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
     setMovies(saved);
   }, []);
