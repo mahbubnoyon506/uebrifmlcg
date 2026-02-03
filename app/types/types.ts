@@ -23,9 +23,32 @@ export interface TMDBResponse<T> {
   total_results: number;
 }
 
-export interface Cast {
+export interface ProductionCompany {
+  id: number;
+  logo_path: string | null;
+  name: string;
+  origin_country: string;
+}
+
+export interface MovieDetails extends Movie {
+  budget: number;
+  genres: Genre[];
+  homepage: string;
+  imdb_id: string;
+  production_companies: ProductionCompany[];
+  revenue: number;
+  runtime: number;
+  status: string;
+  tagline: string;
+}
+
+export interface CastMember {
   id: number;
   name: string;
   character: string;
   profile_path: string | null;
+}
+
+export interface MovieCredits {
+  cast: CastMember[];
 }

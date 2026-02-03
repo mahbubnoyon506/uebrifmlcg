@@ -1,5 +1,5 @@
 import { api } from "../lib/api";
-import { Genre, Movie, TMDBResponse } from "../types/types";
+import { Genre, Movie, MovieCredits, TMDBResponse } from "../types/types";
 
 export const movieService = {
   getTopRated: async (page = 1) => {
@@ -40,6 +40,21 @@ export const movieService = {
     const { data } = await api.get<TMDBResponse<Movie>>("/search/movie", {
       params: { query, page },
     });
+    return data;
+  },
+
+  getSimilarMovies: async (movieId: string, page = 1) => {
+    const { data } = await api.get<TMDBResponse<Movie>>(
+      `/movie/${movieId}/similar`,
+      {
+        params: { page },
+      },
+    );
+    return data;
+  },
+
+  getMovieCredits: async (movieId: string) => {
+    const { data } = await api.get<MovieCredits>(`/movie/${movieId}/credits`);
     return data;
   },
 };
