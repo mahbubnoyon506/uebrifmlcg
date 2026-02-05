@@ -43,6 +43,8 @@ export default function MovieCard({ movie }: MovieCardProps) {
             src={getImageUrl(movie.poster_path)}
             alt={movie.title}
             fill
+            placeholder="blur"
+            blurDataURL={getImageUrl(movie.poster_path)}
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw, 15vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />

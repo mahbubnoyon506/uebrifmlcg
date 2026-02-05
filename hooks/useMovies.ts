@@ -21,7 +21,7 @@ export const useHomeData = () => {
   };
 };
 
-export const useGenrePreview = (genreId: number) => {
+export const useGenrePreview = (genreId: string) => {
   return useQuery({
     queryKey: ["movies", "genre-preview", genreId],
     queryFn: async () => {

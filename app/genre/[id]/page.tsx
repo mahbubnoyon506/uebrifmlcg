@@ -14,6 +14,7 @@ import {
 import { movieService } from "@/services/movieServices";
 import MovieCard from "@/components/MovieCard";
 import { Movie } from "@/types/types";
+import MovieCardSkeleton from "@/components/MovieCardSkeleton";
 
 const SORT_OPTIONS = [
   { label: "Popularity", value: "popularity.desc" },
@@ -26,14 +27,11 @@ export default function GenrePage() {
   const { id } = useParams();
   const [sortBy, setSortBy] = useState("popularity.desc");
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["movies", "genre", id, sortBy],
     queryFn: () => movieService.getMoviesByGenre(id as string, 1, sortBy),
     placeholderData: keepPreviousData,
   });
-
-  if (isError)
-    return <div className="p-10 text-center">Failed to load movies.</div>;
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -59,11 +57,14 @@ export default function GenrePage() {
         </div>
       </div>
 
-      {/* Requirement 2c & 47: Display all movies in a responsive grid [cite: 35, 47] */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {data?.results.map((movie: Movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
+        {isLoading ? (
+          <MovieCardSkeleton count={5} />
+        ) : (
+          data?.results.map((movie: Movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))
+        )}
       </div>
 
       {data?.results.length === 0 && (

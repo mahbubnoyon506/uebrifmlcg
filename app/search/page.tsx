@@ -7,6 +7,7 @@ import MovieCard from "@/components/MovieCard";
 import { Input } from "@/components/ui/input";
 import { Search as SearchIcon, Loader2 } from "lucide-react";
 import { movieService } from "@/services/movieServices";
+import MovieCardSkeleton from "@/components/MovieCardSkeleton";
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,13 +40,15 @@ export default function SearchPage() {
         </div>
       </div>
 
-      {isLoading && debouncedSearch ? (
-        <p>Loading...</p>
-      ) : data?.results && data.results.length > 0 ? (
+      {data?.results && data.results.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {data.results.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
+          {isLoading && debouncedSearch ? (
+            <MovieCardSkeleton count={5} />
+          ) : (
+            data.results.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))
+          )}
         </div>
       ) : (
         debouncedSearch &&

@@ -1,16 +1,15 @@
 "use client";
 
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-
-import { useEffect } from "react";
-
 import { Star, Clock, Calendar } from "lucide-react";
 import { useRecentViewed } from "@/hooks/useRecentViewed";
 import { movieService } from "@/services/movieServices";
 import MovieCard from "@/components/MovieCard";
 import { getImageUrl } from "@/lib/api";
+import MovieCardSkeleton from "@/components/MovieCardSkeleton";
 
 export default function MovieDetailsPage() {
   const { id } = useParams();
@@ -21,7 +20,7 @@ export default function MovieDetailsPage() {
     queryFn: () => movieService.getMovieDetails(id as string),
   });
 
-  const { data: similarMovies } = useQuery({
+  const { data: similarMovies, isLoading: isLoadingSimilar } = useQuery({
     queryKey: ["movie", "similar", id],
     queryFn: () => movieService.getSimilarMovies(id as string),
   });
@@ -31,8 +30,6 @@ export default function MovieDetailsPage() {
     if (movie) addToRecent(movie);
   }, [movie, addToRecent]);
 
-  if (isLoading)
-    return <div className="p-10 text-center">Loading details...</div>;
   if (!movie) return <div className="p-10 text-center">Movie not found.</div>;
 
   return (
@@ -44,6 +41,8 @@ export default function MovieDetailsPage() {
             src={getImageUrl(movie.poster_path, "w780")}
             alt={movie.title}
             fill
+            placeholder="blur"
+            blurDataURL={getImageUrl(movie.poster_path, "w780")}
             className="object-cover"
           />
         </div>
@@ -91,9 +90,13 @@ export default function MovieDetailsPage() {
       <section className="mt-12">
         <h2 className="text-2xl font-bold mb-6">Similar Movies</h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-          {similarMovies?.results.slice(0, 5).map((m) => (
-            <MovieCard key={m.id} movie={m} />
-          ))}
+          {isLoadingSimilar ? (
+            <MovieCardSkeleton count={5} />
+          ) : (
+            similarMovies?.results
+              .slice(0, 5)
+              .map((m) => <MovieCard key={m.id} movie={m} />)
+          )}
         </div>
       </section>
     </div>

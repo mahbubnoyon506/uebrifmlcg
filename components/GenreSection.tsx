@@ -3,12 +3,10 @@ import { ChevronRight } from "lucide-react";
 import { Genre } from "../types/types";
 import { useGenrePreview } from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
+import MovieCardSkeleton from "./MovieCardSkeleton";
 
 export default function GenreSection({ genre }: { genre: Genre }) {
   const { data: movies, isLoading } = useGenrePreview(genre.id);
-
-  if (isLoading)
-    return <div className="h-40 animate-pulse bg-muted rounded-lg" />;
 
   return (
     <div className="space-y-4">
@@ -22,9 +20,11 @@ export default function GenreSection({ genre }: { genre: Genre }) {
         </Link>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        {movies?.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
+        {isLoading ? (
+          <MovieCardSkeleton count={5} />
+        ) : (
+          movies?.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+        )}
       </div>
     </div>
   );
