@@ -40,11 +40,19 @@ export default function MovieCard({ movie }: MovieCardProps) {
       <Link href={`/movies/${movie.id}`}>
         <div className="relative aspect-2/3 w-full">
           <Image
-            src={getImageUrl(movie.poster_path)}
+            src={
+              movie.poster_path
+                ? getImageUrl(movie.poster_path)
+                : "/assets/images/poster-cover-placeholder.jpg"
+            }
             alt={movie.title}
             fill
             placeholder="blur"
-            blurDataURL={getImageUrl(movie.poster_path)}
+            blurDataURL={
+              movie.poster_path
+                ? getImageUrl(movie.poster_path)
+                : "/assets/images/poster-cover-placeholder.jpg"
+            }
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw, 15vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
