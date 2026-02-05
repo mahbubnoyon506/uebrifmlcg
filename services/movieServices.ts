@@ -37,6 +37,8 @@ export const movieService = {
   },
 
   searchMovies: async (query: string, page = 1) => {
+    if (!query)
+      return { results: [], page: 1, total_pages: 0, total_results: 0 };
     const { data } = await api.get<TMDBResponse<Movie>>("/search/movie", {
       params: { query, page },
     });

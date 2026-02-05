@@ -1,4 +1,4 @@
-import { Movie } from "../../types/types";
+import { Movie } from "../types/types";
 
 export const useRecentViewed = () => {
   const addToRecent = (movie: Movie) => {

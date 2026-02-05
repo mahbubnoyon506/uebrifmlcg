@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { movieService } from "../../services/movieServices";
+import { movieService } from "../services/movieServices";
 
 export const useHomeData = () => {
   const genresQuery = useQuery({

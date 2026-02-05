@@ -1,5 +1,5 @@
 "use client";
-import { useHomeData } from "./hooks/useMovies";
+import { useHomeData } from "../hooks/useMovies";
 import MovieCard from "../components/MovieCard";
 import GenreSection from "../components/GenreSection";
 

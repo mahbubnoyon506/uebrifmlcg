@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 import { Star, Clock, Calendar } from "lucide-react";
-import { useRecentViewed } from "@/app/hooks/useRecentViewed";
+import { useRecentViewed } from "@/hooks/useRecentViewed";
 import { movieService } from "@/services/movieServices";
 import MovieCard from "@/components/MovieCard";
 import { getImageUrl } from "@/lib/api";
