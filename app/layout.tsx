@@ -5,12 +5,17 @@ import QueryProvider from "../context/QueryProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { movieService } from "@/services/movieServices";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Movie Discovery App",
-  description: "Browse top-rated movies and manage watch later list",
+export const metadata = {
+  title: {
+    default: "MovieDiscovery - Explore Your Favorite Films",
+    template: "%s | MovieDiscovery",
+  },
+  description:
+    "Search, browse genres, and keep track of movies you want to watch.",
 };
 
 export default function RootLayout({
@@ -23,7 +28,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider>
           <QueryProvider>
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
               <Navbar />
               <main className="grow">{children}</main>
               <Footer />
