@@ -65,7 +65,7 @@ export const movieService = {
   },
 
   getTrendingMovies: async (
-    timeWindow: "day",
+    timeWindow: "day" | "week",
   ): Promise<TMDBResponse<Movie>> => {
     const { data } = await api.get<TMDBResponse<Movie>>(
       `/trending/movie/${timeWindow}`,

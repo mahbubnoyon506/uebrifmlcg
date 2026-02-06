@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import SearchMovies from "./components/SearchMovies";
+import MovieCardSkeleton from "@/components/MovieCardSkeleton";
 
 export const metadata = {
   title: "Search Movies",
@@ -7,5 +9,15 @@ export const metadata = {
 };
 
 export default function SearchPage() {
-  return <SearchMovies />;
+  return (
+    <Suspense
+      fallback={
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+          <MovieCardSkeleton count={10} />
+        </div>
+      }
+    >
+      <SearchMovies />
+    </Suspense>
+  );
 }
