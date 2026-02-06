@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+---
+# 🎬 MovieDiscovery
 
-## Getting Started
+A high-performance, cinematic movie exploration app built with **Next.js 15**, **TMDB API**, and **Tailwind CSS v4**.
 
-First, run the development server:
+**🔗 Live Demo:** [https://uebrifmlcg.vercel.app/](https://uebrifmlcg.vercel.app/)
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+
+- Node.js 18.x or later
+- A TMDB API Key ([Get one here](https://developer.themoviedb.org/docs/getting-started))
+
+### 2. Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/mahbubnoyon506/uebrifmlcg.git
+
+# Install dependencies
+npm install
+
+# Set up Environment Variables
+# Create a .env.local file and add:
+NEXT_PUBLIC_TMDB_API_KEY=your_api_key_here
+NEXT_PUBLIC_TMDB_BASE_URL=https://api.themoviedb.org/3
+
+```
+
+### 3. Run Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Cinematic Hero Section:** Dynamic billboard featuring daily trending movies.
+- **Deep Search:** Real-time search with URL sync (shareable search results).
+- **Genre Navigation:** Filterable movie lists categorized by genre.
+- **Personalization:** "Watch Later" list and "Recently Viewed" history (Local Storage).
+- **Adaptive Theming:** Full Light/Dark mode support using **shadcn/ui** and **OKLCH** color space.
+- **Responsive Design:** Fully optimized for mobile, tablet, and desktop.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack & Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework:** Next.js 15 (App Router)
+- **State & Data:** TanStack Query (React Query) for caching and fetching.
+- **Styling:** Tailwind CSS v4 & shadcn/ui.
+- **Icons:** Lucide React.
+- **Types:** Strict TypeScript interfaces for API responses and movie details.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛡️ Edge Cases & Optimization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **SEO & Metadata:** Implemented `generateMetadata` for dynamic movie and genre pages to ensure unique titles and OpenGraph images for social sharing.
+- **Race Conditions:** Used `useSearchParams` within **Suspense Boundaries** to handle CSR bailout and ensure smooth navigation.
+- **Performance:** \* Implemented **Skeleton Screens** for Hero, Movie Cards, and Cast lists to reduce perceived latency.
+- Optimized images using `next/image` with `remotePatterns` for security.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Error Handling:** Handled 404s for invalid movie IDs and implemented empty states for search results.
+- **Type Safety:** Fixed structural typing issues between basic `Movie` objects and detailed `MovieDetails` to handle optional properties like `tagline`.
+
+---
