@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-
 import {
   Select,
   SelectContent,
@@ -34,7 +33,7 @@ export default function MoviesByGenre({ id }: { id: string }) {
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <h1 className="text-3xl font-bold">Genre Browse</h1>
+        <h1 className="text-lg md:text-2xl font-bold">Genre Browse</h1>
 
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-muted-foreground">
@@ -58,16 +57,16 @@ export default function MoviesByGenre({ id }: { id: string }) {
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {isLoading ? (
           <MovieCardSkeleton count={5} />
-        ) : (
+        ) : data?.results?.length ? (
           data?.results.map((movie: Movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))
+        ) : (
+          <div className="text-center py-20">
+            No movies found for this genre.
+          </div>
         )}
       </div>
-
-      {data?.results.length === 0 && (
-        <div className="text-center py-20">No movies found for this genre.</div>
-      )}
     </main>
   );
 }

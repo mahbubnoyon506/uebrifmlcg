@@ -12,11 +12,17 @@ export const useHomeData = () => {
     queryKey: ["movies", "top-rated"],
     queryFn: () => movieService.getTopRated(1),
   });
+  const trendingQuery = useQuery({
+    queryKey: ["tranding"],
+    queryFn: () => movieService.getTrendingMovies("day"),
+  });
 
   return {
     genres: genresQuery.data,
     topRated: topRatedQuery.data?.results,
+    trending: trendingQuery.data?.results,
     isLoading: genresQuery.isLoading || topRatedQuery.isLoading,
+    isTrendingLoading: trendingQuery.isLoading,
     isError: genresQuery.isError || topRatedQuery.isError,
   };
 };

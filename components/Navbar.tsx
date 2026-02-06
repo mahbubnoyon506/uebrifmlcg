@@ -32,7 +32,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 font-bold text-2xl text-primary"
+            className="flex items-center gap-2 font-bold text-lg md:text-2xl text-primary"
           >
             <Clapperboard className="w-8 h-8" />
             <span className="hidden sm:inline-block">MovieDiscovery</span>

@@ -41,14 +41,13 @@ export default function MovieDetailClient({ id }: { id: string }) {
   return (
     <div>
       <div className="min-h-screen bg-background">
-        {/* Hero Section with Backdrop Overlay */}
         {movieLoading ? (
           <MovieDetailsSkeleton />
         ) : movie ? (
           <div className="relative w-full h-150 md:h-125 flex items-center overflow-hidden">
             <Image
               src={getImageUrl(movie.backdrop_path, "original")}
-              alt="backdrop"
+              alt="movie-cover"
               fill
               placeholder="blur"
               blurDataURL={getImageUrl(movie.backdrop_path, "original")}
@@ -63,7 +62,7 @@ export default function MovieDetailClient({ id }: { id: string }) {
                 <Image
                   src={getImageUrl(movie.poster_path, "w780")}
                   placeholder="blur"
-                  blurDataURL={getImageUrl(movie.poster_path, "w780")}
+                  blurDataURL="/assets/images/poster-cover-placeholder.jpg"
                   alt={movie.title}
                   fill
                   className="object-cover"
@@ -122,13 +121,15 @@ export default function MovieDetailClient({ id }: { id: string }) {
             </div>
           </div>
         ) : null}
-        {/* Main Content Area: Cast and Similar Movies */}
+        {/*  Cast and Similar Movies */}
         {creditsLoading ? (
           <CastSkeleton />
         ) : (
           <div className="container mx-auto px-4 py-12 space-y-12">
             <section>
-              <h2 className="text-2xl font-bold mb-6">Top Billed Cast</h2>
+              <h2 className="text-lg md:text-2xl font-bold mb-6">
+                Top Billed Cast
+              </h2>
               <div className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide">
                 {credits?.cast.slice(0, 15).map((person) => (
                   <div
@@ -145,11 +146,7 @@ export default function MovieDetailClient({ id }: { id: string }) {
                         alt={person.name}
                         fill
                         placeholder="blur"
-                        blurDataURL={
-                          person.profile_path
-                            ? getImageUrl(person.profile_path, "w185")
-                            : "/assets/images/placeholder-avatar.jpg"
-                        }
+                        blurDataURL="/assets/images/placeholder-avatar.jpg"
                         className="object-cover"
                       />
                     </div>
@@ -170,7 +167,7 @@ export default function MovieDetailClient({ id }: { id: string }) {
       </div>
       {/* Similar jobs section */}
       <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-6">Similar Movies</h2>
+        <h2 className="text-lg md:text-2xl font-bold mb-6">Similar Movies</h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
           {isLoadingSimilar ? (
             <MovieCardSkeleton count={5} />

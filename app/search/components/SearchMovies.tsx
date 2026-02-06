@@ -8,9 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Search as SearchIcon, Loader2 } from "lucide-react";
 import { movieService } from "@/services/movieServices";
 import MovieCardSkeleton from "@/components/MovieCardSkeleton";
+import { useSearchParams } from "next/navigation";
 
 export default function SearchMovies() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const searchParams = useSearchParams();
+  const param = searchParams.get("search") || "";
+
+  const [searchTerm, setSearchTerm] = useState(param || "");
   const debouncedSearch = useDebounce(searchTerm, 500);
 
   const { data, isLoading, isFetching } = useQuery({
@@ -23,7 +27,9 @@ export default function SearchMovies() {
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="max-w-2xl mx-auto mb-12">
-        <h1 className="text-3xl font-bold mb-6 text-center">Search Movies</h1>
+        <h1 className="text-lg md:text-2xl font-bold mb-6 text-center">
+          Search Movies
+        </h1>
         <div className="relative">
           <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
           <Input

@@ -10,18 +10,14 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  try {
-    const movie = await movieService.getMovieDetails(id);
-    return {
-      title: movie.title,
-      description: movie.overview.slice(0, 160),
-      openGraph: {
-        images: [getImageUrl(movie.backdrop_path)],
-      },
-    };
-  } catch (error) {
-    return { title: "Movie Not Found" };
-  }
+  const movie = await movieService.getMovieDetails(id);
+  return {
+    title: movie.title,
+    description: movie.overview.slice(0, 160),
+    openGraph: {
+      images: [getImageUrl(movie.backdrop_path)],
+    },
+  };
 }
 
 export default async function MovieDetailsPage({ params }: Props) {

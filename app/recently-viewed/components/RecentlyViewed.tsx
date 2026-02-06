@@ -14,7 +14,7 @@ export default function RecentlyViewed() {
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Recently Viewed</h1>
+      <h1 className="text-lg md:text-2xl font-bold mb-8">Recently Viewed</h1>
       {movies.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
           <p>No recently viewed movies yet.</p>

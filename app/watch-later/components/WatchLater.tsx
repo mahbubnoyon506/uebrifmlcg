@@ -20,7 +20,7 @@ export default function WatchLater() {
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Watch Later</h1>
+      <h1 className="text-lg md:text-2xl font-bold mb-8">Watch Later</h1>
 
       {movies.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">

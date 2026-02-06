@@ -63,4 +63,13 @@ export const movieService = {
     const { data } = await api.get<MovieCredits>(`/movie/${movieId}/credits`);
     return data;
   },
+
+  getTrendingMovies: async (
+    timeWindow: "day",
+  ): Promise<TMDBResponse<Movie>> => {
+    const { data } = await api.get<TMDBResponse<Movie>>(
+      `/trending/movie/${timeWindow}`,
+    );
+    return data;
+  },
 };
