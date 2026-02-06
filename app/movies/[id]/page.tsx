@@ -47,7 +47,7 @@ export default function MovieDetailsPage() {
         {/* Hero Section with Backdrop Overlay */}
         {movieLoading ? (
           <MovieDetailsSkeleton />
-        ) : (
+        ) : movie ? (
           <div className="relative w-full h-150 md:h-125 flex items-center overflow-hidden">
             <Image
               src={getImageUrl(movie.backdrop_path, "original")}
@@ -117,14 +117,14 @@ export default function MovieDetailsPage() {
 
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold">Overview</h3>
-                  <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl">
+                  <p className="line-clamp-5 text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl">
                     {movie.overview}
                   </p>
                 </div>
               </div>
             </div>
           </div>
-        )}
+        ) : null}
         {/* Main Content Area: Cast and Similar Movies */}
         {creditsLoading ? (
           <CastSkeleton />
@@ -184,7 +184,6 @@ export default function MovieDetailsPage() {
           )}
         </div>
       </section>
-      ;
     </div>
   );
 }

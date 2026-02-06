@@ -1,6 +1,6 @@
 export function MovieDetailsSkeleton() {
   return (
-    <div className="animate-pulse">
+    <div className="bg-background animate-pulse">
       <div className="relative w-full h-150 md:h-125 flex items-center">
         <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row gap-8">
           {/* Poster Skeleton */}
@@ -44,11 +44,11 @@ export function MovieDetailsSkeleton() {
 
 export function CastSkeleton() {
   return (
-    <div className=" animate-pulse">
+    <div className="bg-background animate-pulse">
       <div className="container mx-auto px-4 py-12">
         <div className="h-8 w-48 bg-muted rounded mb-6" />
         <div className="flex gap-4 overflow-hidden">
-          {[...Array(9)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <div
               key={i}
               className="min-w-35 border border-border rounded-lg overflow-hidden"

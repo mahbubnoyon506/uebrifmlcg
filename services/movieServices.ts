@@ -1,5 +1,11 @@
 import { api } from "../lib/api";
-import { Genre, Movie, MovieCredits, TMDBResponse } from "../types/types";
+import {
+  Genre,
+  Movie,
+  MovieCredits,
+  MovieDetails,
+  TMDBResponse,
+} from "../types/types";
 
 export const movieService = {
   getTopRated: async (page = 1) => {
@@ -29,10 +35,8 @@ export const movieService = {
     return data;
   },
 
-  getMovieDetails: async (movieId: string) => {
-    const { data } = await api.get<Movie & { genres: Genre[] }>(
-      `/movie/${movieId}`,
-    );
+  getMovieDetails: async (id: string): Promise<MovieDetails> => {
+    const { data } = await api.get<MovieDetails>(`/movie/${id}`);
     return data;
   },
 

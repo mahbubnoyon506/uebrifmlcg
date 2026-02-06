@@ -10,8 +10,11 @@ import {
   Bookmark,
   History,
   Search,
+  Moon,
+  Sun,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/context/ThemeContext";
 
 const NAV_LINKS = [
   { name: "Home", href: "/", icon: Film },
@@ -21,7 +24,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { theme, toggleTheme } = useTheme();
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto px-4">
@@ -47,6 +50,17 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-accent transition-colors cursor-pointer"
+              aria-label="Toggle Theme"
+            >
+              {theme === "light" ? (
+                <Moon className="w-5 h-5 text-slate-700" />
+              ) : (
+                <Sun className="w-5 h-5 text-yellow-400" />
+              )}
+            </button>
             <Link href="/search">
               <Button variant="ghost" size="icon">
                 <Search className="w-5 h-5" />
@@ -56,6 +70,17 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-accent transition-colors cursor-pointer"
+              aria-label="Toggle Theme"
+            >
+              {theme === "light" ? (
+                <Moon className="w-5 h-5 text-slate-700" />
+              ) : (
+                <Sun className="w-5 h-5 text-yellow-400" />
+              )}
+            </button>
             <Link href="/search">
               <Search className="w-5 h-5" />
             </Link>
