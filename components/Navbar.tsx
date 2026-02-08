@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/context/ThemeContext";
+import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
   { name: "Home", href: "/", icon: Film },
@@ -23,6 +24,7 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
+  const pathName = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -37,14 +39,14 @@ export default function Navbar() {
   }, []);
   return (
     <nav
-      className={`fixed top-0 z-50 w-full ${theme === "light" && !isScrolled ? "text-white" : ""} ${isScrolled ? "border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60" : "bg-transparent"}`}
+      className={`${pathName === "/" ? "fixed" : "sticky"} fixed top-0 z-50 w-full ${theme === "light" && !isScrolled && pathName === "/" ? "text-white" : ""} ${isScrolled ? "border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60" : "bg-transparent"}`}
     >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className={`flex items-center gap-2 font-bold text-lg md:text-2xl ${theme === "light" && !isScrolled ? "text-white" : "text-primary"}`}
+            className={`flex items-center gap-2 font-bold text-xl md:text-3xl ${theme === "light" && !isScrolled && pathName === "/" ? "text-white" : "text-primary"}`}
           >
             <Clapperboard className="w-8 h-8" />
             <span className="hidden sm:inline-block">MovieDiscovery</span>
@@ -64,7 +66,7 @@ export default function Navbar() {
             ))}
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full hover:bg-accent transition-colors cursor-pointer ${theme === "light" && !isScrolled ? "text-white hover:text-slate-700" : ""}`}
+              className={`p-2 rounded-full hover:bg-accent transition-colors cursor-pointer ${theme === "light" && !isScrolled && pathName === "/" ? "text-white hover:text-slate-700" : ""}`}
               aria-label="Toggle Theme"
             >
               {theme === "light" ? (
@@ -84,7 +86,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-4">
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full hover:bg-accent transition-colors cursor-pointer ${theme === "light" && !isScrolled ? "text-white hover:text-slate-700" : ""}`}
+              className={`p-2 rounded-full hover:bg-accent transition-colors cursor-pointer ${theme === "light" && !isScrolled && pathName === "/" ? "text-white hover:text-slate-700" : ""}`}
               aria-label="Toggle Theme"
             >
               {theme === "light" ? (

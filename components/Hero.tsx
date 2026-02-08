@@ -9,9 +9,10 @@ import { Movie } from "@/types/types";
 
 interface HeroProps {
   movie: Movie;
+  onFocusChange: (isFocused: boolean) => void;
 }
 
-export default function Hero({ movie }: HeroProps) {
+export default function Hero({ movie, onFocusChange }: HeroProps) {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
@@ -23,7 +24,7 @@ export default function Hero({ movie }: HeroProps) {
   };
 
   return (
-    <div className="relative w-full h-[70vh] min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
           src={
@@ -58,6 +59,8 @@ export default function Hero({ movie }: HeroProps) {
             <input
               type="text"
               placeholder="Search for a movie, person or genre..."
+              onFocus={() => onFocusChange(true)}
+              onBlur={() => onFocusChange(false)}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="w-full h-14 md:h-16 pl-6 pr-32 rounded-full bg-white/95 dark:bg-slate-900/90 backdrop-blur-md text-foreground border-none shadow-2xl focus:ring-2 focus:ring-primary transition-all text-lg"

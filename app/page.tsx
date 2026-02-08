@@ -8,11 +8,21 @@ import HeroSkeleton from "@/components/HeroSkeleton";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useRef } from "react";
 
 export default function HomePage() {
   const { genres, topRated, trending, isLoading, isTrendingLoading } =
     useHomeData();
 
+  const sliderRef = useRef<Slider>(null);
+
+  const handleInputFocus = (isFocused: boolean) => {
+    if (isFocused) {
+      sliderRef.current?.slickPause();
+    } else {
+      sliderRef.current?.slickPlay();
+    }
+  };
   const settings = {
     arrows: false,
     fade: true,
@@ -24,6 +34,7 @@ export default function HomePage() {
     slidesToScroll: 1,
     waitForAnimate: true,
     pauseOnHover: false,
+    pauseOnFocus: true,
   };
 
   return (
@@ -33,9 +44,13 @@ export default function HomePage() {
         <HeroSkeleton />
       ) : trending?.length ? (
         <div className="slider-container">
-          <Slider {...settings}>
+          <Slider ref={sliderRef} {...settings}>
             {trending.slice(0, 5).map((item) => (
-              <Hero key={item.id} movie={item} />
+              <Hero
+                key={item.id}
+                movie={item}
+                onFocusChange={handleInputFocus}
+              />
             ))}
           </Slider>
         </div>
