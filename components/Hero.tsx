@@ -28,8 +28,9 @@ export default function Hero({ movie, onFocusChange }: HeroProps) {
       <div className="absolute inset-0 z-0">
         <Image
           src={
-            getImageUrl(movie.backdrop_path, "original") ||
-            "/assets/images/cover.jpg"
+            movie?.backdrop_path
+              ? getImageUrl(movie.backdrop_path, "original")
+              : "/assets/images/poster-placeholder-landscape.jpg"
           }
           alt={movie.title}
           fill

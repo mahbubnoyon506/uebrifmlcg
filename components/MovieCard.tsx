@@ -41,7 +41,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
         <div className="relative aspect-2/3 w-full">
           <Image
             src={
-              movie.poster_path
+              movie?.poster_path
                 ? getImageUrl(movie.poster_path)
                 : "/assets/images/poster-cover-placeholder.jpg"
             }

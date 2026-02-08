@@ -46,12 +46,16 @@ export default function MovieDetailClient({ id }: { id: string }) {
         ) : movie ? (
           <div className="relative w-full h-150 md:h-125 flex items-center overflow-hidden">
             <Image
-              src={getImageUrl(movie.backdrop_path, "original")}
+              src={
+                movie?.backdrop_path
+                  ? getImageUrl(movie.backdrop_path, "original")
+                  : "/assets/images/poster-placeholder-landscape.jpg"
+              }
               alt="movie-cover"
               fill
               placeholder="blur"
-              blurDataURL={getImageUrl(movie.backdrop_path, "original")}
-              className="object-cover object-top opacity-40"
+              blurDataURL="/assets/images/poster-placeholder-landscape.jpg"
+              className="object-cover object-center opacity-40"
               priority
             />
             <div className="absolute inset-0 bg-linear-to-r from-background via-background/80 to-transparent" />
@@ -60,7 +64,11 @@ export default function MovieDetailClient({ id }: { id: string }) {
               {/* Poster Container */}
               <div className="hidden md:block w-72 shrink-0 relative aspect-2/3 rounded-lg overflow-hidden shadow-2xl border border-white/10">
                 <Image
-                  src={getImageUrl(movie.poster_path, "w780")}
+                  src={
+                    movie?.poster_path
+                      ? getImageUrl(movie.poster_path, "w780")
+                      : "/assets/images/poster-cover-placeholder.jpg"
+                  }
                   placeholder="blur"
                   blurDataURL="/assets/images/poster-cover-placeholder.jpg"
                   alt={movie.title}
@@ -74,7 +82,7 @@ export default function MovieDetailClient({ id }: { id: string }) {
                 <h1 className="text-4xl md:text-5xl font-bold">
                   {movie.title}{" "}
                   <span className="font-light text-muted-foreground">
-                    ({new Date(movie.release_date).getFullYear()})
+                    ({new Date(movie.release_date).getFullYear() || "N/A"})
                   </span>
                 </h1>
 
@@ -139,9 +147,9 @@ export default function MovieDetailClient({ id }: { id: string }) {
                     <div className="relative aspect-2/3 w-full">
                       <Image
                         src={
-                          person.profile_path
+                          person?.profile_path
                             ? getImageUrl(person.profile_path, "w185")
-                            : "/placeholder-avatar.jpg"
+                            : "/assets/images/placeholder-avatar.jpg"
                         }
                         alt={person.name}
                         fill
