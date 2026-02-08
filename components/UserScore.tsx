@@ -3,7 +3,7 @@ interface UserScoreProps {
 }
 
 export function UserScore({ score }: UserScoreProps) {
-  const percentage = Math.round(score * 10);
+  const percentage = score ? Math.round(score * 10) : 0;
   const color =
     percentage >= 70 ? "#21d17a" : percentage >= 40 ? "#d2d531" : "#db2360";
 

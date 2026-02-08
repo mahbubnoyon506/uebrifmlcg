@@ -55,7 +55,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
 
           <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
             <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
-            {movie.vote_average.toFixed(1)}
+            {movie.vote_average?.toFixed(1) || "0.0"}
           </div>
 
           <button

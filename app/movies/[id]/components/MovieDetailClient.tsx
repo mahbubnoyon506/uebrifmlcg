@@ -130,23 +130,21 @@ export default function MovieDetailClient({ id }: { id: string }) {
               <h2 className="text-lg md:text-2xl font-bold mb-6">
                 Top Billed Cast
               </h2>
-              <div className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide">
+              <div className="flex overflow-x-auto gap-4 pb-6 custom-scrollbar scroll-smooth">
                 {credits?.cast.slice(0, 15).map((person) => (
                   <div
                     key={person.id}
-                    className="min-w-35 bg-card rounded-lg border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                    className="min-w-35 md:min-w-40 bg-card rounded-lg border border-border overflow-hidden shadow-sm transition-all hover:scale-[1.02]"
                   >
-                    <div className="relative aspect-square w-full">
+                    <div className="relative aspect-2/3 w-full">
                       <Image
                         src={
                           person.profile_path
                             ? getImageUrl(person.profile_path, "w185")
-                            : "/assets/images/placeholder-avatar.jpg"
+                            : "/placeholder-avatar.jpg"
                         }
                         alt={person.name}
                         fill
-                        placeholder="blur"
-                        blurDataURL="/assets/images/placeholder-avatar.jpg"
                         className="object-cover"
                       />
                     </div>
