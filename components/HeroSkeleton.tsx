@@ -1,6 +1,6 @@
 export default function HeroSkeleton() {
   return (
-    <div className="relative w-full h-[70vh] min-h-125 flex items-center justify-center bg-muted/20 animate-pulse">
+    <div className="relative w-full h-[70vh] min-h-screen flex items-center justify-center bg-muted/20 animate-pulse">
       <div className="absolute inset-0 bg-linear-to-t from-background via-muted/10 to-transparent" />
 
       <div className="container relative z-10 px-4 text-center space-y-8">

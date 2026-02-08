@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Menu,
   X,
@@ -24,15 +24,27 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <nav
+      className={`fixed top-0 z-50 w-full ${theme === "light" && !isScrolled ? "text-white" : ""} ${isScrolled ? "border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60" : "bg-transparent"}`}
+    >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 font-bold text-lg md:text-2xl text-primary"
+            className={`flex items-center gap-2 font-bold text-lg md:text-2xl ${theme === "light" && !isScrolled ? "text-white" : "text-primary"}`}
           >
             <Clapperboard className="w-8 h-8" />
             <span className="hidden sm:inline-block">MovieDiscovery</span>
@@ -52,11 +64,11 @@ export default function Navbar() {
             ))}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-accent transition-colors cursor-pointer"
+              className={`p-2 rounded-full hover:bg-accent transition-colors cursor-pointer ${theme === "light" && !isScrolled ? "text-white hover:text-slate-700" : ""}`}
               aria-label="Toggle Theme"
             >
               {theme === "light" ? (
-                <Moon className="w-5 h-5 text-slate-700" />
+                <Moon className="w-5 h-5" />
               ) : (
                 <Sun className="w-5 h-5 text-yellow-400" />
               )}
@@ -72,11 +84,11 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-4">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-accent transition-colors cursor-pointer"
+              className={`p-2 rounded-full hover:bg-accent transition-colors cursor-pointer ${theme === "light" && !isScrolled ? "text-white hover:text-slate-700" : ""}`}
               aria-label="Toggle Theme"
             >
               {theme === "light" ? (
-                <Moon className="w-5 h-5 text-slate-700" />
+                <Moon className="w-5 h-5" />
               ) : (
                 <Sun className="w-5 h-5 text-yellow-400" />
               )}

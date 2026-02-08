@@ -12,4 +12,6 @@ export const api = axios.create({
 });
 
 export const getImageUrl = (path: string, size: string = "w500") =>
-  path ? `https://image.tmdb.org/t/p/${size}${path}` : "/placeholder-movie.png";
+  path
+    ? `https://image.tmdb.org/t/p/${size}${path}`
+    : "/assets/images/poster-cover-placeholder.jpg";
