@@ -142,4 +142,13 @@
     cursor: pointer;
   }
 
+  .slider-container .slick-slide img {
+    transition: transform 8000ms ease;
+    transform: scale(1.0);
+  }
+
+  .slider-container .slick-active img {
+    transform: scale(1.15);
+  }
+
 }
