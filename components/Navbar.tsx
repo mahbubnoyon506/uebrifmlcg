@@ -46,7 +46,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className={`flex items-center gap-2 font-bold text-xl md:text-3xl ${theme === "light" && !isScrolled && pathName === "/" ? "text-white" : "text-primary"}`}
+            className={`flex items-center gap-2 font-bold text-xl lg:text-3xl ${theme === "light" && !isScrolled && pathName === "/" ? "text-white" : "text-primary"}`}
           >
             <Clapperboard className="w-8 h-8" />
             <span className="hidden sm:inline-block">MovieDiscovery</span>
